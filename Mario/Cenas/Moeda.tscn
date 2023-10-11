@@ -45,7 +45,7 @@ script = ExtResource( 2 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 1 )
 animation = "girando"
-frame = 4
+frame = 2
 playing = true
 
 [node name="Colisao" type="CollisionShape2D" parent="."]

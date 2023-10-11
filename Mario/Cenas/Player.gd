@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-export var gravity = 5
+export var gravity = 10
 export var walk_speed = 150
 export var jump_force = -50
 export var velocity = Vector2()
@@ -39,9 +39,7 @@ func _physics_process(delta):
 		$Animacao.flip_h = false
 	elif velocity.x < 0:
 		$Animacao.flip_h = true
-	
-	if is_on_ceiling():
-		velocity.y = 0
+
 	if is_on_floor():
 		can_double_jump = true
 	if is_on_floor() and Input.is_action_just_pressed("ui_up"):
@@ -62,13 +60,16 @@ func grow():
 	Global.is_big = true
 
 func damage():
-	if not invencivel:
+	if Global.is_big:
 		current_animation = 0
 		$Colisao.scale.y = 1
 		self.position.y += 8
 		Global.is_big = false
 		invencivel = true
+		$AnimationPlayer.play("invencivel")
 		$Invencivel.start()
+	else:
+		die()
 	
 func volta():
 	position.x = 201
@@ -79,10 +80,11 @@ func is_falling():
 	return velocity.y > 0
 	
 func die():
-	$AnimationPlayer.play("morte")
-	$Timer.start()
-	$Animacao.position.y = 0
-	$Colisao.position.y = 190
+	if not invencivel:
+		$AnimationPlayer.play("morte")
+		$Timer.start()
+		$Animacao.position.y = 0
+		$Colisao.position.y = 190
 
 func _on_Timer_timeout():
 	get_tree().reload_current_scene()
