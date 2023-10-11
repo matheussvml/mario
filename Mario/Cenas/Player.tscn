@@ -1,0 +1,155 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Cenas/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_walk_1.tres" type="Texture" id=2]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_jump_1.tres" type="Texture" id=3]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_idle.tres" type="Texture" id=4]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_jump_0.tres" type="Texture" id=5]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_walk_0.tres" type="Texture" id=6]
+[ext_resource path="res://Assets Mario/sounds/smw_jump.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets Mario/AtlasTexture/morte2.tres" type="Texture" id=8]
+[ext_resource path="res://Assets Mario/AtlasTexture/morte.tres" type="Texture" id=9]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_jump_big_0.tres" type="Texture" id=10]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_idle_big.tres" type="Texture" id=11]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_walk_big_0.tres" type="Texture" id=12]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_walk_big_1.tres" type="Texture" id=13]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_jump_big_1.tres" type="Texture" id=14]
+[ext_resource path="res://Assets Mario/AtlasTexture/mario_walk_big_2.tres" type="Texture" id=15]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "dead",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "idle",
+"speed": 60.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "idle_big",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "jump",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "jump_big",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 14.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 15 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "walk_big",
+"speed": 12.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 16.5 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animacao:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "morte"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_physics_process"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Animacao:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "dead" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Animacao:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -44 ), Vector2( 0, 500 ) ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+walk_speed = 250
+
+[node name="Animacao" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+animation = "jump_big"
+
+[node name="Colisao" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3.5 )
+shape = SubResource( 5 )
+
+[node name="AudioPulo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+limit_left = -200
+limit_top = -50
+limit_right = 1500
+limit_bottom = 600
+
+[node name="Notificador" type="VisibilityNotifier2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/morte = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+
+[node name="Invencivel" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="morreu" from="." to="." method="_on_Player_morreu"]
+[connection signal="screen_exited" from="Notificador" to="." method="_on_Notificador_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Invencivel" to="." method="_on_Invencivel_timeout"]
