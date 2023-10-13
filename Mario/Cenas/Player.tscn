@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Cenas/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets Mario/AtlasTexture/mario_walk_1.tres" type="Texture" id=2]
@@ -15,6 +15,11 @@
 [ext_resource path="res://Assets Mario/AtlasTexture/mario_walk_big_1.tres" type="Texture" id=13]
 [ext_resource path="res://Assets Mario/AtlasTexture/mario_jump_big_1.tres" type="Texture" id=14]
 [ext_resource path="res://Assets Mario/AtlasTexture/mario_walk_big_2.tres" type="Texture" id=15]
+[ext_resource path="res://Assets Mario/sounds/smw_stomp.wav" type="AudioStream" id=16]
+[ext_resource path="res://Assets Mario/sounds/smw_break_block.wav" type="AudioStream" id=17]
+[ext_resource path="res://Assets Mario/sounds/smw_coin.wav" type="AudioStream" id=18]
+[ext_resource path="res://Assets Mario/sounds/smw_pipe.wav" type="AudioStream" id=19]
+[ext_resource path="res://Assets Mario/sounds/smw_power-up.wav" type="AudioStream" id=20]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -146,9 +151,9 @@ stream = ExtResource( 7 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
-limit_left = -200
+limit_left = -20000
 limit_top = -50
-limit_right = 1500
+limit_right = 150000
 limit_bottom = 600
 
 [node name="Notificador" type="VisibilityNotifier2D" parent="."]
@@ -164,6 +169,24 @@ wait_time = 2.5
 [node name="Invencivel" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="BreakBlock" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+
+[node name="pisei" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[node name="PegarMoeda" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+
+[node name="morte" type="AudioStreamPlayer" parent="."]
+
+[node name="powerUP" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+
+[node name="powerDown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = 4.0
 
 [connection signal="morreu" from="." to="." method="_on_Player_morreu"]
 [connection signal="screen_exited" from="Notificador" to="." method="_on_Notificador_screen_exited"]

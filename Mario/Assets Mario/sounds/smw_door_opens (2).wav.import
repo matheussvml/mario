@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/smw_door_opens (2).wav-4209a73a61504e0d98c9906073996726.sample"
+
+[deps]
+
+source_file="res://Assets Mario/sounds/smw_door_opens (2).wav"
+dest_files=[ "res://.import/smw_door_opens (2).wav-4209a73a61504e0d98c9906073996726.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

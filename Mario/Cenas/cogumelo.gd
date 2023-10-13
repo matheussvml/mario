@@ -4,7 +4,7 @@ var velocity = Vector2()
 
 var direcao = 1
 var speed = 50
-var gravity = 5
+var gravity = 30
 var hited = false
 
 func _ready():

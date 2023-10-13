@@ -1,18 +1,18 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets Mario/Super-Mario-World.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Assets Mario/AtlasTexture/hud.tres" type="Texture" id=2]
+[ext_resource path="res://Assets Mario/AtlasTexture/HUD_moeda.tres" type="Texture" id=2]
 [ext_resource path="res://Cenas/HUD.gd" type="Script" id=3]
-[ext_resource path="res://Assets Mario/vida-removebg-preview.png" type="Texture" id=4]
+[ext_resource path="res://Assets Mario/AtlasTexture/HUD_mario.tres" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-size = 20
+size = 25
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 14
+size = 25
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
@@ -29,35 +29,36 @@ custom_fonts/font = SubResource( 1 )
 text = "0"
 
 [node name="vidas" type="Label" parent="."]
-margin_left = 87.0
-margin_top = 11.0
-margin_right = 107.0
-margin_bottom = 34.0
+margin_left = 95.0
+margin_top = 38.0
+margin_right = 118.0
+margin_bottom = 67.0
 custom_fonts/font = SubResource( 1 )
 text = "3"
 
 [node name="Moedass" type="Sprite" parent="."]
-position = Vector2( 921, 23 )
-scale = Vector2( 0.265, 0.23125 )
+position = Vector2( 930.36, 22.5094 )
+scale = Vector2( 3.08, 2.62265 )
 texture = ExtResource( 2 )
 
 [node name="x" type="Label" parent="."]
-margin_left = 940.0
-margin_top = 15.0
-margin_right = 980.0
-margin_bottom = 33.0
+margin_left = 873.0
+margin_top = 21.0
+margin_right = 913.0
+margin_bottom = 39.0
 custom_fonts/font = SubResource( 2 )
-text = "x"
+text = "
+"
 
 [node name="x2" type="Label" parent="."]
-margin_left = 66.0
-margin_top = 16.0
-margin_right = 79.0
-margin_bottom = 33.0
+margin_left = 51.0
+margin_top = 37.0
+margin_right = 65.0
+margin_bottom = 54.0
 custom_fonts/font = SubResource( 2 )
 text = "x"
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 49, 24 )
-scale = Vector2( 0.0608209, 0.0604893 )
+position = Vector2( 60.75, 22.6744 )
+scale = Vector2( 2.63095, 3.26512 )
 texture = ExtResource( 4 )

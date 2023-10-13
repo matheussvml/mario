@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-export var gravity = 10
+export var gravity = 10	
 export var walk_speed = 150
 export var jump_force = -50
 export var velocity = Vector2()
@@ -44,8 +44,10 @@ func _physics_process(delta):
 		can_double_jump = true
 	if is_on_floor() and Input.is_action_just_pressed("ui_up"):
 		velocity.y = jump_force
+		$AudioPulo.play()
 	elif can_double_jump and Input.is_action_just_pressed("ui_up"):
 		velocity.y = jump_force
+		$AudioPulo.play()
 		can_double_jump = false
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -67,10 +69,24 @@ func damage():
 		Global.is_big = false
 		invencivel = true
 		$AnimationPlayer.play("invencivel")
+		$powerDown.play()
 		$Invencivel.start()
 	else:
 		die()
 	
+
+func break_block():
+	$BreakBlock.play()
+
+func pisei():
+	$pisei.play()
+
+func pegar_moeda():
+	Global.score += 1
+	Hud.update_hud()
+	$PegarMoeda.play()
+
+
 func volta():
 	position.x = 201
 	position.y = 346

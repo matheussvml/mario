@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets Mario/AtlasTexture/block.tres" type="Texture" id=1]
 [ext_resource path="res://Cenas/Bloco.gd" type="Script" id=2]
 [ext_resource path="res://Cenas/Moeda.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets Mario/sounds/smw_break_block.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -35,10 +36,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -5 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -5 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Moeda:position")
@@ -64,6 +65,22 @@ tracks/2/keys = {
 "values": [  ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "bateu2"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -5 ), Vector2( 0, 0 ) ]
+}
+
 [node name="Bloco" type="StaticBody2D"]
 collision_layer = 3
 collision_mask = 3
@@ -86,5 +103,9 @@ shape = SubResource( 2 )
 [node name="Animador" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )
 anims/bateu = SubResource( 3 )
+anims/bateu2 = SubResource( 5 )
+
+[node name="quebrou" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="body_entered" from="AreaImpacto" to="." method="_on_AreaImpacto_body_entered"]
