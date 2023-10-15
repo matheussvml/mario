@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Cenas/Level.tres" type="TileSet" id=1]
-[ext_resource path="res://Assets Mario/sounds/01. Ground Theme.mp3" type="AudioStream" id=2]
+[ext_resource path="res://Assets Mario/sounds/MusicaTema_1.wav" type="AudioStream" id=2]
 [ext_resource path="res://Cenas/Bloco.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Cenas/inimigo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Cenas/Player.tscn" type="PackedScene" id=5]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets Mario/bg3.png" type="Texture" id=13]
 [ext_resource path="res://Assets Mario/bg.png" type="Texture" id=14]
 [ext_resource path="res://Cenas/Level.gd" type="Script" id=15]
+[ext_resource path="res://Assets Mario/AtlasTexture/GoalPost.tres" type="Texture" id=16]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 15 )
@@ -80,8 +81,6 @@ position = Vector2( 328, 415 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 201, 346 )
-walk_speed = 150
-jump_force = -350
 
 [node name="Nuvem" type="Sprite" parent="."]
 position = Vector2( 190, 187 )
@@ -139,8 +138,14 @@ texture = ExtResource( 7 )
 position = Vector2( 548, 46 )
 texture = ExtResource( 7 )
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 829, 306 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 16 )
+
 [node name="Portal" parent="." instance=ExtResource( 9 )]
 position = Vector2( 825, 405 )
+scale = Vector2( 2, 2 )
 
 [node name="FimMapa" parent="." instance=ExtResource( 11 )]
 position = Vector2( -55, 622 )
@@ -148,4 +153,5 @@ position = Vector2( -55, 622 )
 [node name="LuckyBlock" parent="." instance=ExtResource( 12 )]
 position = Vector2( 284, 331 )
 
+[connection signal="body_entered" from="Portal" to="." method="_on_Portal_body_entered"]
 [connection signal="body_entered" from="Portal" to="Bloco" method="_on_Portal_body_entered"]

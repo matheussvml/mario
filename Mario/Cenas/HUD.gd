@@ -6,3 +6,6 @@ func _ready():
 func update_hud():
 	$Moedas.text = str(Global.score)
 	$vidas.text = str(Global.vidas)
+	
+
+

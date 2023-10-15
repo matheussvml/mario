@@ -13,3 +13,8 @@ func _on_AreaImpacto_body_entered(body):
 			$Sprite.play("nada")
 			$AreaImpacto/CollisionShape2D.disabled = true
 			$cogumelo.hited()
+			$PowerUpAparece.play()
+
+func cogu_menu():
+	$AnimationPlayer.play("bater")
+

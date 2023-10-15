@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Cenas/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets Mario/AtlasTexture/mario_walk_1.tres" type="Texture" id=2]
@@ -20,6 +20,14 @@
 [ext_resource path="res://Assets Mario/sounds/smw_coin.wav" type="AudioStream" id=18]
 [ext_resource path="res://Assets Mario/sounds/smw_pipe.wav" type="AudioStream" id=19]
 [ext_resource path="res://Assets Mario/sounds/smw_power-up.wav" type="AudioStream" id=20]
+[ext_resource path="res://Assets Mario/sounds/MusicaTema_1.wav" type="AudioStream" id=21]
+[ext_resource path="res://Assets Mario/sounds/smw_lost_a_life.wav" type="AudioStream" id=22]
+[ext_resource path="res://Assets Mario/Assets player/idle_inverso.tres" type="Texture" id=23]
+[ext_resource path="res://Assets Mario/Assets player/MarioWalk1.tres" type="Texture" id=24]
+[ext_resource path="res://Assets Mario/Assets player/idle_inverso_big.tres" type="Texture" id=25]
+[ext_resource path="res://Assets Mario/Assets player/walk1_big.tres" type="Texture" id=26]
+[ext_resource path="res://Assets Mario/Assets player/venceu.tres" type="Texture" id=27]
+[ext_resource path="res://Assets Mario/sounds/MusicaGanhou.wav" type="AudioStream" id=28]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,6 +35,16 @@ animations = [ {
 "loop": true,
 "name": "dead",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "fall_big",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": false,
@@ -36,6 +54,16 @@ animations = [ {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "idle_big",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "idle_inverso",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 25 ) ],
+"loop": true,
+"name": "idle_inverso_big",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 3 ) ],
@@ -48,10 +76,25 @@ animations = [ {
 "name": "jump_big",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 27 ) ],
+"loop": true,
+"name": "venceu",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 6 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "walk",
 "speed": 14.0
+}, {
+"frames": [ ExtResource( 24 ) ],
+"loop": true,
+"name": "walk1",
+"speed": 14.0
+}, {
+"frames": [ ExtResource( 26 ) ],
+"loop": true,
+"name": "walk1_big",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 15 ), ExtResource( 13 ) ],
 "loop": true,
@@ -75,6 +118,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Colisao:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Animacao:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -133,17 +200,125 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -44 ), Vector2( 0, 500 ) ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "venceu"
+length = 7.95
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animacao:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.901, 0.95, 1, 1.1, 7.45, 7.5, 7.55, 7.6, 7.65, 7.7, 7.75, 7.8, 7.85, 7.9, 7.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "walk", "walk1", "walk", "walk1", "walk", "walk1", "walk", "walk1", "walk", "walk1", "walk", "walk1", "walk", "walk1", "walk", "walk1", "walk", "walk1", "idle", "walk", "walk1", "idle", "idle_inverso", "walk", "walk1", "walk", "walk1", "walk", "walk1", "walk", "walk1", "walk", "walk1", "walk" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Animacao:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 7.45, 7.5, 7.55, 7.6, 7.65, 7.7, 7.75, 7.8, 7.85, 7.9, 7.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 10, 0 ), Vector2( 20, 0 ), Vector2( 30, 0 ), Vector2( 40, 0 ), Vector2( 50, 0 ), Vector2( 60, 0 ), Vector2( 70, 0 ), Vector2( 80, 0 ), Vector2( 90, 0 ), Vector2( 100, 0 ), Vector2( 110, 0 ), Vector2( 120, 0 ), Vector2( 130, 0 ), Vector2( 140, 0 ), Vector2( 150, 0 ), Vector2( 160, 0 ), Vector2( 170, 0 ), Vector2( 180, 0 ), Vector2( 190, 0 ), Vector2( 200, 0 ), Vector2( 200, 0 ), Vector2( 205, 0 ), Vector2( 210, 0 ), Vector2( 215, 0 ), Vector2( 220, 0 ), Vector2( 225, 0 ), Vector2( 230, 0 ), Vector2( 235, 0 ), Vector2( 240, 0 ), Vector2( 245, 0 ), Vector2( 250, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Colisao:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 7.45, 7.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 200, 3.5 ), Vector2( 200, 3.5 ), Vector2( 200, -100 ), Vector2( 250, -100 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.45 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_physics_process"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "venceu_big"
+length = 9.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animacao:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.801, 0.9, 1, 7, 8.1, 8.15, 8.2, 8.25, 8.3, 8.35, 8.4, 8.45, 8.5, 8.55, 8.6, 8.65, 8.7, 8.75, 8.8, 8.85, 8.9, 8.95, 9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "idle_big", "walk_big", "walk1_big", "walk_big", "walk1_big", "walk_big", "walk1_big", "walk_big", "walk1", "walk1_big", "walk_big", "idle_inverso_big", "venceu", "idle_big", "walk1_big", "walk_big", "walk1_big", "walk_big", "walk1_big", "walk_big", "walk1_big", "walk_big", "walk1_big", "walk_big", "walk1_big", "walk_big", "walk1_big", "walk_big", "walk1_big", "walk_big", "walk1_big", "idle_inverso_big" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Animacao:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 7, 8.1, 9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10, -10 ), Vector2( 110, -10 ), Vector2( 110, -10 ), Vector2( 120, -10 ), Vector2( 210, -10 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Colisao:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, 0 ), Vector2( 210, -100 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_physics_process"
+} ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
-walk_speed = 250
 
 [node name="Animacao" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-animation = "jump_big"
+animation = "idle"
 
 [node name="Colisao" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 3.5 )
 shape = SubResource( 5 )
 
 [node name="AudioPulo" type="AudioStreamPlayer" parent="."]
@@ -162,9 +337,11 @@ limit_bottom = 600
 anims/RESET = SubResource( 3 )
 anims/invencivel = SubResource( 6 )
 anims/morte = SubResource( 4 )
+anims/venceu = SubResource( 7 )
+anims/venceu_big = SubResource( 8 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 3.27
 
 [node name="Invencivel" type="Timer" parent="."]
 wait_time = 1.5
@@ -180,6 +357,7 @@ stream = ExtResource( 16 )
 stream = ExtResource( 18 )
 
 [node name="morte" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
 
 [node name="powerUP" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
@@ -187,6 +365,12 @@ stream = ExtResource( 20 )
 [node name="powerDown" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
 volume_db = 4.0
+
+[node name="AudioTema" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 21 )
+
+[node name="AudioVenceu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 28 )
 
 [connection signal="morreu" from="." to="." method="_on_Player_morreu"]
 [connection signal="screen_exited" from="Notificador" to="." method="_on_Notificador_screen_exited"]

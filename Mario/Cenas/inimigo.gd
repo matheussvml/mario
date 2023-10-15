@@ -23,12 +23,13 @@ func _on_TimerPatrulha_timeout():
 
 func _on_Area2D_body_entered(body):
 	if body is Player:
-		print(body.is_falling() )
-		if body.is_falling() and body.global_position.y < self.global_position.y:
+		print(body.is_falling())
+		if body.is_falling() and body.global_position.y <= self.global_position.y:
 			$Animacao.scale.y -= 0.5 * $Animacao.scale.y
 			$Animacao.position.y *= -3
-			body.velocity.y = body.jump_force
+			body.motion.y = body.JUMP_FORCE
 			$Timer.start()
+			body.pisei()
 		else:
 			body.damage()
 			Hud.update_hud()

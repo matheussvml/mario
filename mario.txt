@@ -1,0 +1,48 @@
+
+posição inicial
+x = 86
+y = 488
+
+posição do pulo
+
+x = 1040
+y = 488
+
+posição no pulo
+
+x = 1040
+y = 424
+
+posição pós pulo
+x = 1040
+y = 488
+
+posição para pegar cogumelo
+x = 1096
+y = 488
+
+posição da borda
+x = 1288
+y = 488
+
+
+posição do bloco
+x = 1040
+y = 384
+
+posiçao do bloco final
+x = 
+y = 384
+
+posição para começar a cair
+x = 1328
+y = 488
+
+chão depois da borda
+x = 1352
+y = 520
+
+posição para pular no goomba
+x = 1960
+y = 520
+
