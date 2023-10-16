@@ -73,8 +73,8 @@ func _physics_process(delta):
 
 
 
-func _on_Notificador_screen_exited():
-	emit_signal("morreu")
+
+
 
 func grow():
 	if not Global.is_big:
@@ -95,6 +95,7 @@ func damage():
 		$powerDown.play()
 		$Invencivel.start()
 	else:
+		emit_signal("morreu")
 		die()
 	
 

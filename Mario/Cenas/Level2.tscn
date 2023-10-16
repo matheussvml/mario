@@ -562,9 +562,13 @@ centered = false
 
 [node name="inimigo" parent="." instance=ExtResource( 3 )]
 position = Vector2( 335, 400 )
+collision_layer = 1
+collision_mask = 1
 
 [node name="inimigo2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 831, 237 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="Moeda" parent="." instance=ExtResource( 4 )]
 position = Vector2( 328, 321 )
@@ -586,23 +590,31 @@ position = Vector2( 20, 665 )
 
 [node name="inimigo3" parent="." instance=ExtResource( 3 )]
 position = Vector2( -867, 528 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="inimigo4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -1186, 490 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="inimigo5" parent="." instance=ExtResource( 3 )]
 position = Vector2( -1431, 492 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="inimigo6" parent="." instance=ExtResource( 3 )]
 position = Vector2( -1745, 528 )
-collision_layer = 1
-collision_mask = 1
+collision_layer = 3
+collision_mask = 3
 
 [node name="plataforma" parent="." instance=ExtResource( 10 )]
 position = Vector2( -635, 552 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -2053, 495 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="plataforma2" parent="." instance=ExtResource( 10 )]
 position = Vector2( -464, 552 )
