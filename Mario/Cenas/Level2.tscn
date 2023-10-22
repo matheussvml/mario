@@ -591,10 +591,10 @@ position = Vector2( -867, 528 )
 position = Vector2( -1186, 490 )
 
 [node name="inimigo5" parent="." instance=ExtResource( 3 )]
-position = Vector2( -1431, 492 )
+position = Vector2( -1449, 495 )
 
 [node name="inimigo6" parent="." instance=ExtResource( 3 )]
-position = Vector2( -1745, 528 )
+position = Vector2( -1056, 602 )
 collision_layer = 1
 collision_mask = 1
 

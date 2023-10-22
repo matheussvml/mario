@@ -26,6 +26,11 @@ var animations = [
 var current_animation = 0
 
 func _ready():
+	if Global.level == 2:
+		$AudioFundo.play()
+		$AudioTema.stop()
+	else:
+		$AudioTema.play()
 	if Global.is_big:
 		$Animacao.position.y -= 8
 		current_animation_index = 1
@@ -33,19 +38,20 @@ func _ready():
 func _physics_process(delta):
 		motion.y += gravity
 	
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("ui_right") || Input.is_action_pressed("direita"):
 			motion.x = min(motion.x+ACCELERATION, MAXVELOCITY)
 			$Animacao.flip_h = false
 			$Animacao.play(animations[current_animation_index][0])
-		elif Input.is_action_pressed("ui_left"):
+		elif Input.is_action_pressed("ui_left") || Input.is_action_pressed("esquerda") :
 			motion.x = max(motion.x-ACCELERATION, -MAXVELOCITY)
 			$Animacao.flip_h = true
 			$Animacao.play(animations[current_animation_index][0])
 		else:
 			motion.x = lerp(motion.x, 0, 0.2)
 			$Animacao.play(animations[current_animation_index][1])
+			
 		
-		if Input.is_action_just_pressed("ui_up") and is_on_floor():
+		if Input.is_action_just_pressed("ui_up") || Input.is_action_just_pressed("pulo")  and is_on_floor():
 			motion.y = JUMP_FORCE
 			$AudioPulo.play()
 	
@@ -112,6 +118,7 @@ func pegar_moeda():
 
 func winner():
 	$AudioTema.stop()
+	$AudioFundo.stop()
 	$AudioVenceu.play()
 	if Global.is_big:
 		$AnimationPlayer.play("venceu_big")
@@ -135,6 +142,7 @@ func die():
 		$Animacao.position.y = 0
 		$Colisao.position.y = 190
 		$AudioTema.stop()
+		$AudioFundo.stop()
 		$morte.play()
 
 func morte():

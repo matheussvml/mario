@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready():
-	$AudioFundo.play()
+	#$AudioFundo.play()
 	$Portal.SubirDescer()
 
 
